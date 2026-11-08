@@ -1,0 +1,103 @@
+/* ============================================================
+   Адаптив. Mobile First.
+   ============================================================ */
+
+img, video { max-width: 100%; height: auto; }
+
+body { overflow-x: hidden; }
+
+/* ---------- Навигация ---------- */
+.site-nav {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: var(--space-sm);
+  width: 100%;
+}
+
+.site-nav__list {
+  flex-direction: column;
+  align-items: stretch;
+}
+
+.site-nav__cta { width: 100%; margin-top: var(--space-xs); }
+
+@media (min-width: 900px) {
+  .site-nav {
+    flex-direction: row;
+    align-items: center;
+    width: auto;
+    gap: var(--space-lg);
+  }
+  .site-nav__list { flex-direction: row; align-items: center; }
+  .site-nav__cta { width: auto; margin-top: 0; }
+}
+
+/* ---------- Hero на мобильных: ограничим высоту ---------- */
+.hero {
+  min-height: 100svh;
+  padding-top: clamp(100px, 16vh, 180px);
+}
+
+@media (min-width: 900px) {
+  .hero { padding-top: clamp(140px, 20vh, 220px); }
+}
+
+/* ---------- Сетка карточек ---------- */
+.products-grid { grid-template-columns: 1fr; }
+
+.product-card__title,
+.product-card__description { overflow-wrap: anywhere; }
+
+@media (min-width: 640px) {
+  .products-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+
+@media (min-width: 1024px) {
+  .products-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+}
+
+/* ---------- Каталог ---------- */
+@media (min-width: 900px) {
+  .catalog-layout {
+    grid-template-columns: 300px minmax(0, 1fr);
+    grid-template-areas: "filters products";
+    align-items: start;
+  }
+  .catalog-filters {
+    position: sticky;
+    top: 88px;
+  }
+}
+
+/* ---------- Страница товара ---------- */
+@media (min-width: 900px) {
+  .product-detail {
+    grid-template-columns: 1.1fr 1fr;
+    align-items: start;
+  }
+  /* На десктопе галерея — вертикальная колонна со скроллом */
+  .product-gallery {
+    flex-direction: column;
+    overflow-y: auto;
+    overflow-x: hidden;
+    max-height: 620px;
+    scroll-snap-type: y mandatory;
+    padding-bottom: 0;
+    padding-right: 6px;
+  }
+  .product-gallery__item { flex: 0 0 auto; scroll-snap-align: start; }
+}
+
+/* ---------- Форма ---------- */
+@media (min-width: 768px) {
+  .order-form { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .order-form__group--wide,
+  .order-form__actions,
+  .order-form__field--checkbox { grid-column: 1 / -1; }
+}
+
+/* ---------- Кнопка «наверх» ---------- */
+@media (min-width: 768px) {
+  .to-top { right: var(--space-xl); bottom: var(--space-xl); }
+}
