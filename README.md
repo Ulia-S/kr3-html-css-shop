@@ -45,7 +45,7 @@
 
 ## Ссылка на опубликованный проект
 
-GitHub Pages: https://ulia-s.github.io/kr1-html-css-shop/
+GitHub Pages: https://ulia-s.github.io/kr3-html-css-shop/
 
 ## История выполнения
 
