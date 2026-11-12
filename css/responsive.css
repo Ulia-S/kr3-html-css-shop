@@ -7,33 +7,17 @@ img, video { max-width: 100%; height: auto; }
 body { overflow-x: hidden; }
 
 /* ---------- Навигация ---------- */
-.site-nav {
-  display: flex;
-  flex-direction: column;
-  align-items: stretch;
-  gap: var(--space-sm);
-  width: 100%;
+/* Мобильная навигация — горизонтальная, элементы сжимаются */
+@media (max-width: 900px) {
+  .site-nav__link { padding: 8px 6px; font-size: 12px; }
+  .site-header__theme,
+  .site-header__cta { min-height: 32px; padding: 0 10px; font-size: 11px; }
+  .cart-counter,
+  .fav-counter { display: none; }  /* на мобильных счётчики скрываем */
 }
 
-.site-nav__list {
-  flex-direction: column;
-  align-items: stretch;
-}
 
-.site-nav__cta { width: 100%; margin-top: var(--space-xs); }
-
-@media (min-width: 900px) {
-  .site-nav {
-    flex-direction: row;
-    align-items: center;
-    width: auto;
-    gap: var(--space-lg);
-  }
-  .site-nav__list { flex-direction: row; align-items: center; }
-  .site-nav__cta { width: auto; margin-top: 0; }
-}
-
-/* ---------- Hero на мобильных: ограничим высоту ---------- */
+/* ---------- Hero на мобильных ---------- */
 .hero {
   min-height: 100svh;
   padding-top: clamp(100px, 16vh, 180px);
@@ -76,16 +60,6 @@ body { overflow-x: hidden; }
     grid-template-columns: 1.1fr 1fr;
     align-items: start;
   }
-  /* На десктопе галерея — вертикальная колонна со скроллом */
-  .product-gallery {
-    flex-direction: column;
-    overflow-y: auto;
-    overflow-x: hidden;
-    max-height: 620px;
-    scroll-snap-type: y mandatory;
-    padding-bottom: 0;
-    padding-right: 6px;
-  }
   .product-gallery__item { flex: 0 0 auto; scroll-snap-align: start; }
 }
 
@@ -100,4 +74,42 @@ body { overflow-x: hidden; }
 /* ---------- Кнопка «наверх» ---------- */
 @media (min-width: 768px) {
   .to-top { right: var(--space-xl); bottom: var(--space-xl); }
+}
+
+.catalog-filters { grid-area: filters; }
+.catalog-products { grid-area: products; }
+
+@media (max-width: 899px) {
+  .catalog-toolbar { grid-template-columns: 1fr; }
+}
+
+/* ===== Адаптивные исправления ===== */
+@media (min-width: 900px) {
+  .catalog-toolbar {
+    width: min(100% - 32px, var(--container-width));
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 18px;
+    margin: 24px auto;
+  }
+  .catalog-toolbar__field { min-width: 0; }
+}
+@media (max-width: 899px) {
+  .catalog-toolbar {
+    width: min(100% - 32px, var(--container-width));
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 14px;
+    margin: 20px auto;
+  }
+  .catalog-products { width: min(100% - 32px, var(--container-width)); }
+  .products-grid { gap: 18px; }
+  .site-header { position: relative; }
+  .site-header__inner { flex-wrap: wrap; justify-content: center; }
+  .site-nav { width: 100%; overflow-x: auto; }
+  .site-nav__list { justify-content: center; flex-wrap: wrap; }
+}
+@media (max-width: 639px) {
+  .products-grid { grid-template-columns: 1fr; }
+  .product-card { margin-bottom: 4px; }
 }

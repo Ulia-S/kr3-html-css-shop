@@ -1,13 +1,8 @@
-/* ============================================================
-   Учебный интернет-магазин — стиль в духе BMW
-   Только CSS. Никакого нового JS.
-   ============================================================ */
-
 html {
   scroll-behavior: smooth;
 }
 
-/* ---------- 1. Переменные ---------- */
+/* ---------- Переменные ---------- */
 :root {
   --color-bg: #ffffff;
   --color-bg-dark: #000000;
@@ -44,7 +39,7 @@ html {
   --font-base: "Helvetica Neue", Arial, sans-serif;
 }
 
-/* ---------- 2. База ---------- */
+/* ---------- База ---------- */
 *,
 *::before,
 *::after {
@@ -74,7 +69,7 @@ a:hover {
   color: var(--color-primary-dark);
 }
 
-/* Заголовки: без отрицательного letter-spacing, вес 600 вместо 700/800 */
+/* Заголовки */
 h1, h2, h3 {
   font-weight: 600;
   line-height: 1.2;
@@ -93,7 +88,7 @@ p { margin: 0 0 var(--space-md); }
   outline-offset: 3px;
 }
 
-/* ---------- 3. Skip-link ---------- */
+/* ---------- Skip-link ---------- */
 .skip-link {
   position: absolute;
   left: 16px;
@@ -110,7 +105,7 @@ p { margin: 0 0 var(--space-md); }
   top: 16px;
 }
 
-/* ---------- 4. Контейнеры ---------- */
+/* ---------- Контейнеры ---------- */
 .container,
 .section {
   width: min(100% - 32px, var(--container-width));
@@ -122,7 +117,7 @@ p { margin: 0 0 var(--space-md); }
   margin-inline: 0;
 }
 
-/* ---------- 5. Кнопки: прямые углы ---------- */
+/* ---------- Кнопки ---------- */
 .button {
   display: inline-flex;
   align-items: center;
@@ -170,9 +165,9 @@ p { margin: 0 0 var(--space-md); }
   cursor: not-allowed;
 }
 
-/* ---------- 6. Шапка (прозрачная поверх hero) ---------- */
+/* ---------- Шапка ---------- */
 .site-header {
-  position: absolute;   /* «лежит» поверх hero */
+  position: absolute;   /* лежит поверх hero */
   top: 0;
   left: 0;
   right: 0;
@@ -184,28 +179,69 @@ p { margin: 0 0 var(--space-md); }
 .site-header__inner {
   max-width: var(--container-width);
   margin: 0 auto;
-  padding: 18px var(--space-lg);
+  padding: 14px var(--space-lg);
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: var(--space-lg);
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
 }
 
-.site-header__logo {
-  font-size: 20px;
-  font-weight: 600;             /* не 800 */
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: #fff;
+.site-header__logo { flex-shrink: 0; }
+
+.site-nav { flex-shrink: 1; min-width: 0; }
+
+.site-nav__list {
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: center;
+  gap: 2px;
+  padding: 0;
+  margin: 0;
+  list-style: none;
 }
 
-.site-header__logo:hover {
-  color: #fff;
-  opacity: 0.8;
+.site-nav__link {
+  display: inline-block;
+  padding: 10px 14px;
+  font-size: 14px;
+  font-weight: 500;
+  color: #000;
+  border-radius: 0;
+  white-space: nowrap;
 }
 
-/* Навигация поверх тёмной картинки — белые ссылки */
+.site-nav__link:hover { color: #fff; background-color: #000; }
+.site-nav__link--active { color: #fff; background-color: #000; }
+
+/* Правый блок действий */
+.site-header__actions {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  flex-shrink: 0;
+}
+
+.cart-counter,
+.fav-counter {
+  font-size: 13px;
+  color: var(--color-muted);
+  white-space: nowrap;
+}
+
+.site-header__theme {
+  min-height: 36px;
+  padding: 0 14px;
+  font-size: 13px;
+}
+
+.site-header__cta {
+  min-height: 36px;
+  padding: 0 18px;
+  font-size: 13px;
+}
+
+/* Навигация */
 .site-nav {
   display: flex;
   align-items: center;
@@ -257,9 +293,6 @@ p { margin: 0 0 var(--space-md); }
   border-color: #fff;
 }
 
-/* Если страница без hero (например, каталог) — шапка не должна быть прозрачной.
-   Добавьте на body класс .has-hero только на главной/страницах с hero.
-   Без него шапка будет тёмной по умолчанию. */
 .site-header--solid {
   position: sticky;
   background-color: #fff;
@@ -272,11 +305,13 @@ p { margin: 0 0 var(--space-md); }
 .site-header--solid .site-nav__link:hover { color: #fff; background-color: #000; }
 .site-header--solid .site-nav__link--active { color: #fff; background-color: #000; }
 
-/* ---------- 7. Hero на весь экран ---------- */
+/* ---------- Hero ---------- */
 .hero {
   position: relative;
   width: 100%;
-  min-height: calc(100svh - 73px); /* 73px ≈ высота шапки, подгоните */
+  height: 100svh;
+  min-height: 100px;
+  box-sizing: border-box;
   margin: 0;
   padding: 48px 24px;
   display: flex;
@@ -322,7 +357,7 @@ p { margin: 0 0 var(--space-md); }
 }
 
 .hero h1 {
-  font-weight: 500;               /* спокойный вес */
+  font-weight: 500;
   font-size: clamp(32px, 5.5vw, 60px);
   text-shadow: 0 2px 20px rgba(0, 0, 0, 0.35);
 }
@@ -341,7 +376,6 @@ p { margin: 0 0 var(--space-md); }
   margin-top: var(--space-md);
   margin-left: auto;
   margin-right: auto;
-  /* чтобы кнопка не растягивалась на всю ширину: */
   display: inline-flex;
   max-width: max-content;
 }
@@ -352,7 +386,7 @@ p { margin: 0 0 var(--space-md); }
   border-color: #fff;
 }
 
-/* ---------- 8. Блок «Выберите для себя» ---------- */
+/* ---------- Блок «Выберите для себя» ---------- */
 .bmw-choose {
   padding-block: clamp(40px, 6vw, 80px);
 }
@@ -373,7 +407,68 @@ p { margin: 0 0 var(--space-md); }
   color: var(--color-muted);
 }
 
-/* ---------- 9. Сетка и карточки ---------- */
+/* ---------- Сетка и карточки ---------- */
+/* ---------- Слайдер карточек на главной ---------- */
+.products-slider {
+  position: relative;
+}
+
+.products-slider__track {
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: minmax(260px, 320px);
+  gap: clamp(16px, 2.5vw, 28px);
+  overflow-x: auto;
+  overflow-y: hidden;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+  padding-bottom: 8px;
+  scrollbar-width: thin;
+}
+
+.products-slider__track .bmw-card {
+  scroll-snap-align: start;
+  height: 100%;
+}
+
+.products-slider__arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 5;
+  width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+  line-height: 1;
+  color: #fff;
+  background-color: #000;
+  border: 1px solid #000;
+  border-radius: 0;
+  cursor: pointer;
+  transition: background-color 0.2s ease, color 0.2s ease, opacity 0.2s ease;
+}
+
+.products-slider__arrow:hover {
+  color: #000;
+  background-color: #fff;
+}
+
+.products-slider__arrow:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+}
+
+.products-slider__arrow--prev { left: -8px; }
+.products-slider__arrow--next { right: -8px; }
+
+@media (max-width: 767px) {
+  .products-slider__arrow { display: none; }
+  .products-slider__track { grid-auto-columns: 85%; }
+}
+
 .products-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
@@ -386,7 +481,7 @@ p { margin: 0 0 var(--space-md); }
   flex-direction: column;
   background-color: #fff;
   border: 1px solid var(--color-border);
-  border-radius: 0;              /* прямые углы */
+  border-radius: 0;
   overflow: hidden;
   transition: box-shadow 0.25s ease, transform 0.25s ease;
 }
@@ -487,7 +582,7 @@ p { margin: 0 0 var(--space-md); }
   border-radius: 0;
 }
 
-/* ---------- 10. Преимущества / aside ---------- */
+/* ---------- Преимущества ---------- */
 .advantages-list {
   padding-left: var(--space-lg);
   margin: 0;
@@ -511,7 +606,7 @@ p { margin: 0 0 var(--space-md); }
   font-weight: 400;
 }
 
-/* ---------- 11. Хлебные крошки ---------- */
+/* ---------- Хлебные крошки ---------- */
 .breadcrumbs {
   max-width: var(--container-width);
   margin: 0 auto var(--space-lg);
@@ -523,24 +618,63 @@ p { margin: 0 0 var(--space-md); }
 .breadcrumbs__link { color: var(--color-primary); }
 .breadcrumbs__current::before { content: " / "; color: var(--color-muted); }
 
-/* ---------- 12. Каталог ---------- */
+/* ---------- Каталог ---------- */
 .catalog-layout {
   max-width: var(--container-width);
   margin: 0 auto var(--space-2xl);
   display: grid;
   gap: var(--space-lg);
+  padding-inline: 16px;
   grid-template-columns: 1fr;
   grid-template-areas:
     "filters"
     "products";
 }
 
-.catalog-filters {
-  grid-area: filters;
-  padding: var(--space-lg);
-  border: 1px solid var(--color-border);
-  border-radius: 0;
+.catalog-toolbar {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-md);
+  margin-bottom: var(--space-lg);
+  padding: var(--space-md);
   background-color: var(--color-surface);
+  border: 1px solid var(--color-border);
+}
+
+.catalog-toolbar__field { display: grid; gap: var(--space-xs); }
+
+.catalog-toolbar__label {
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--color-muted);
+}
+
+.catalog-toolbar__input {
+  width: 100%;
+  min-height: 44px;
+  padding: 8px 12px;
+  border: 1px solid var(--color-border-input);
+  border-radius: 0;
+  background-color: #fff;
+  font: inherit;
+}
+
+.catalog-toolbar__input:hover { border-color: #000; }
+.catalog-toolbar__input:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+}
+
+@media (min-width: 700px) {
+  .catalog-toolbar { grid-template-columns: 2fr 1fr 1fr; align-items: end; }
+}
+
+.catalog-count {
+  font-size: 14px;
+  color: var(--color-muted);
+  margin: 0 0 var(--space-md);
 }
 
 .catalog-products { grid-area: products; min-width: 0; }
@@ -576,7 +710,7 @@ p { margin: 0 0 var(--space-md); }
   font: inherit;
 }
 
-/* ---------- 13. Страница товара ---------- */
+/* ---------- Страница товара ---------- */
 .product-detail {
   display: grid;
   grid-template-columns: 1fr;
@@ -584,19 +718,19 @@ p { margin: 0 0 var(--space-md); }
   padding: 0;
 }
 
-/* Галерея со скроллом (только CSS) */
+/* Галерея со скроллом */
 .product-gallery {
   display: flex;
+  flex-direction: row;          /* элементы в ряд */
   gap: 12px;
-  overflow-x: auto;
+  overflow-x: auto;             /* горизонтальный скролл */
+  overflow-y: hidden;
   scroll-snap-type: x mandatory;
-  -webkit-overflow-scrolling: touch;
   padding-bottom: 8px;
-  border-radius: 0;
 }
 
 .product-gallery__item {
-  flex: 0 0 100%;                 /* одна картинка = ширина контейнера */
+  flex: 0 0 100%;               /* одна картинка на всю ширину контейнера */
   scroll-snap-align: start;
   background-color: var(--color-surface);
   overflow: hidden;
@@ -607,12 +741,6 @@ p { margin: 0 0 var(--space-md); }
   width: 100%;
   aspect-ratio: 4 / 3;
   object-fit: cover;
-}
-
-/* На узких экранах можно показать «кусочек» следующей картинки,
-   чтобы было видно, что галерея скроллится */
-@media (max-width: 767px) {
-  .product-gallery__item { flex-basis: 88%; }
 }
 
 .product-detail__info {
@@ -711,7 +839,7 @@ p { margin: 0 0 var(--space-md); }
   font-weight: 600;
 }
 
-/* ---------- 14. Заявка ---------- */
+/* ---------- Заявка ---------- */
 .order-page__intro { color: var(--color-muted); }
 
 .order-page .order-form {
@@ -722,7 +850,7 @@ p { margin: 0 0 var(--space-md); }
   background-color: #fff;
 }
 
-/* ---------- 15. Форма ---------- */
+/* ---------- Форма ---------- */
 .order-form {
   display: grid;
   gap: var(--space-md);
@@ -786,7 +914,7 @@ p { margin: 0 0 var(--space-md); }
 
 [aria-invalid="true"] { border-color: var(--color-danger); }
 
-/* ---------- 16. Модальное окно ---------- */
+/* ---------- Модальное окно ---------- */
 .order-dialog {
   width: min(100% - 32px, 560px);
   max-height: calc(100vh - 32px);
@@ -800,7 +928,7 @@ p { margin: 0 0 var(--space-md); }
 .order-dialog::backdrop { background-color: rgba(0, 0, 0, 0.6); }
 .order-dialog__title { margin-top: 0; }
 
-/* ---------- 17. Успешное сообщение ---------- */
+/* ---------- Успешное сообщение ---------- */
 .success-message {
   max-width: var(--container-width);
   margin: var(--space-lg) auto;
@@ -810,7 +938,7 @@ p { margin: 0 0 var(--space-md); }
   border-radius: 0;
 }
 
-/* ---------- 18. Кнопка «наверх» ---------- */
+/* ---------- Кнопка «наверх» ---------- */
 .to-top {
   position: fixed;
   right: var(--space-lg);
@@ -823,7 +951,7 @@ p { margin: 0 0 var(--space-md); }
   font-size: 20px;
   color: #fff;
   background-color: #000;
-  border-radius: 0;              /* квадратная */
+  border-radius: 0;
   text-decoration: none;
   z-index: 90;
   transition: background-color 0.2s ease;
@@ -831,7 +959,7 @@ p { margin: 0 0 var(--space-md); }
 
 .to-top:hover { color: #fff; background-color: var(--color-primary); }
 
-/* ---------- 19. Подвал ---------- */
+/* ---------- Подвал ---------- */
 .site-footer {
   padding: clamp(24px, 4vw, 48px) var(--space-lg);
   background-color: #000;
@@ -853,3 +981,234 @@ p { margin: 0 0 var(--space-md); }
   background-color: transparent;
   border-color: #fff;
 }
+
+.product-output {
+  padding: 16px;
+  overflow-x: auto;
+  color: #f9fafb;
+  background-color: #111827;
+  border-radius: 8px;
+}
+
+/* ---------- Корзина---------- */
+.cart-page h1 { margin-bottom: var(--space-lg); }
+
+.cart-layout {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-lg);
+}
+
+@media (min-width: 900px) {
+  .cart-layout { grid-template-columns: 1fr 340px; align-items: start; }
+}
+
+.cart-list {
+  display: grid;
+  gap: var(--space-sm);
+}
+
+.cart-row {
+  display: grid;
+  grid-template-columns: 1fr auto auto;
+  gap: var(--space-md);
+  align-items: center;
+  padding: var(--space-md);
+  background-color: #fff;
+  border: 1px solid var(--color-border);
+}
+
+.cart-row__title { font-weight: 500; }
+.cart-row__sum { font-weight: 600; }
+
+.cart-summary {
+  padding: var(--space-lg);
+  padding-bottom: 24px;
+  margin-bottom: 24px;
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-border);
+}
+
+.cart-summary__title { 
+  margin: 0 0 var(--space-sm); 
+
+  font-size: 18px; 
+}
+.cart-summary__total {
+  font-size: 18px;
+  font-weight: 600;
+  margin: 0 0 var(--space-md);
+}
+
+.cart-summary__actions {
+  display: grid;
+  gap: var(--space-sm);
+  margin-top: var(--space-md);
+}
+
+.promo { display: grid; gap: var(--space-xs); }
+.promo__row { display: flex; gap: var(--space-sm); }
+.promo__row .order-form__input { flex: 1; }
+.promo-message { min-height: 18px; font-size: 13px; color: var(--color-muted); margin: 0; }
+
+/* ---------- Тёмная тема ---------- */
+:root.theme-dark {
+  --color-bg: #121212;
+  --color-bg-dark: #000000;
+  --color-surface: #1e1e1e;
+  --color-surface-header: #1a1a1a;
+  --color-surface-accent: #1e2630;
+  --color-text: #e8e8e8;
+  --color-text-inverse: #111;
+  --color-muted: #a0a0a0;
+  --color-border: #333333;
+  --color-border-input: #444444;
+  --color-white: #e8e8e8;
+}
+
+:root.theme-dark body {
+  background-color: var(--color-bg);
+  color: var(--color-text);
+}
+
+:root.theme-dark .bmw-card,
+:root.theme-dark .filters-form fieldset,
+:root.theme-dark .catalog-toolbar,
+:root.theme-dark .order-page .order-form,
+:root.theme-dark .order-form__input,
+:root.theme-dark .order-form__select,
+:root.theme-dark .order-form__textarea,
+:root.theme-dark .catalog-toolbar__input,
+:root.theme-dark .filters-form input[type="number"] {
+  background-color: var(--color-surface);
+  color: var(--color-text);
+}
+
+:root.theme-dark .site-header--solid {
+  background-color: var(--color-surface-header);
+}
+
+:root.theme-dark .site-header--solid .site-header__logo { color: var(--color-text); }
+:root.theme-dark .site-header--solid .site-nav__link { color: var(--color-text); }
+:root.theme-dark .site-header--solid .site-nav__link:hover { color: #fff; background-color: #000; }
+:root.theme-dark .site-header--solid .site-nav__link--active { color: #fff; background-color: #000; }
+
+:root.theme-dark .bmw-card__title,
+:root.theme-dark .product-card__price,
+:root.theme-dark .bmw-card__link { color: var(--color-text); }
+
+:root.theme-dark .cart-row,
+:root.theme-dark .cart-summary { background-color: var(--color-surface); border-color: var(--color-border); }
+
+/* ---------- Избранное ---------- */
+.fav-btn {
+  min-width: 46px;
+  padding: 0 12px;
+  font-size: 20px;
+  line-height: 1;
+  color: #333;
+}
+
+.fav-btn.is-favorite {
+  color: #e00;
+  border-color: #e00;
+}
+
+/* ---------- Карточки в корзине ---------- */
+.cart-product-card {
+  display: flex;
+  gap: var(--space-md);
+  align-items: center;
+  padding: var(--space-md);
+  background-color: #fff;
+  border: 1px solid var(--color-border);
+}
+
+:root.theme-dark .cart-product-card { background-color: var(--color-surface); }
+
+.cart-product-card__image {
+  width: 88px;
+  height: 66px;
+  object-fit: cover;
+  flex-shrink: 0;
+}
+
+.cart-product-card__info { flex: 1; min-width: 0; }
+.cart-product-card__title { margin: 0 0 4px; font-weight: 500; }
+.cart-product-card__meta { margin: 0; font-size: 14px; color: var(--color-muted); }
+
+.cart-product-card__qty { display: flex; align-items: center; gap: 6px; }
+.cart-product-card__qty button { min-height: 32px; min-width: 32px; padding: 0; }
+
+/* ---------- Сетка карточек товара в корзине ---------- */
+.cart-list { display: grid; gap: var(--space-sm); }
+
+/* ---------- Сетка избранного ---------- */
+.fav-empty { color: var(--color-muted); }
+
+/* ===== Исправления интерфейса MeteoMarket ===== */
+.site-header, .site-header--solid {
+  position: relative;
+  background: var(--color-surface-header, #fff);
+  border-bottom: 1px solid var(--color-border, #ddd);
+}
+.site-header__inner { min-height: 76px; }
+.site-nav__list { flex-wrap: wrap; }
+.product-card, .bmw-card { position: relative; min-width: 0; }
+.product-card__actions { display: flex; align-items: center; gap: 10px; }
+.fav-btn {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  z-index: 3;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 42px;
+  height: 42px;
+  min-height: 42px;
+  padding: 0;
+  border: 0 !important;
+  background: transparent !important;
+  color: #222;
+  font-size: 29px;
+  line-height: 1;
+  box-shadow: none !important;
+}
+.fav-btn:hover { color: #c62828; background: transparent !important; }
+.fav-btn.is-favorite { color: #c62828; }
+.product-card__button.is-in-cart { background: #168a2f; border-color: #168a2f; color: #fff; }
+.catalog-toolbar { margin: 24px auto; }
+.catalog-products { width: min(100% - 32px, var(--container-width)); margin: 0 auto 48px; }
+.products-grid { gap: 24px; }
+.products-grid > .product-card { margin: 0; }
+.catalog-toolbar__field { min-width: 0; }
+.order-dialog {
+  width: min( min(92vw, 620px), 620px );
+  max-height: 90vh;
+  overflow-y: auto;
+  padding: 28px;
+  border: 1px solid var(--color-border, #ddd);
+}
+.order-dialog::backdrop { background: rgb(0 0 0 / 55%); }
+.order-dialog__title { margin-bottom: 20px; }
+
+/* Горизонтальный слайдер главной страницы */
+.products-grid.is-slider-track {
+  display: flex;
+  overflow-x: auto;
+  overflow-y: hidden;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+  scrollbar-width: none;
+  gap: 24px;
+  padding: 8px 2px 18px;
+}
+.products-grid.is-slider-track::-webkit-scrollbar { display: none; }
+.products-grid.is-slider-track > .product-card {
+  flex: 0 0 min(360px, 82vw);
+  scroll-snap-align: start;
+}
+.products-slider { position: relative; }
+.products-slider__arrow { z-index: 5; cursor: pointer; }
+.products-slider__arrow:disabled { opacity: .35; cursor: default; }

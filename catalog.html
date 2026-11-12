@@ -13,6 +13,11 @@
 
   <link rel="stylesheet" href="css/style.css">
   <link rel="stylesheet" href="css/responsive.css">
+  <script src="js/data.js" defer></script>
+  <script src="js/cart.js" defer></script>
+  <script src="js/catalog.js" defer></script>
+  <script src="js/modal.js" defer></script>
+  <script src="js/validation.js" defer></script>
   <script src="js/main.js" defer></script>
 </head>
 <body>
@@ -24,24 +29,20 @@
 
       <nav class="site-nav" aria-label="Основная навигация">
         <ul class="site-nav__list">
-          <li class="site-nav__item">
-            <a class="site-nav__link" href="index.html">
-              Главная
-            </a>
-          </li>
-          <li class="site-nav__item">
-            <a class="site-nav__link site-nav__link--active" href="catalog.html">Каталог</a>
-          </li>
-          <li class="site-nav__item">
-            <a class="site-nav__link" href="contacts.html">Контакты</a>
-          </li>
-          <li class="site-nav__item">
-            <a class="site-nav__link" href="index.html#popular">
-              Популярные товары
-            </a>
-          </li>
+          <li><a class="site-nav__link " href="index.html">Главная</a></li>
+          <li><a class="site-nav__link site-nav__link--active" href="catalog.html">Каталог</a></li>
+          <li><a class="site-nav__link " href="contacts.html">Контакты</a></li>
+          <li><a class="site-nav__link " href="favorites.html">Избранное</a></li>
+          <li><a class="site-nav__link " href="cart.html">Корзина</a></li>
+          <li><a class="site-nav__link" href="index.html#popular">Популярные товары</a></li>
         </ul>
       </nav>
+
+      <div class="site-header__actions">
+        <span class="cart-counter" aria-live="polite">Корзина: 0</span>
+        <span class="fav-counter" aria-live="polite">Избранное: 0</span>
+        <button type="button" data-toggle-theme class="button button--secondary site-header__theme">Тема</button>
+      </div>
     </div>
   </header>
 
@@ -60,131 +61,41 @@
       </p>
     </section>
 
-    <section class="catalog-layout">
-      <!-- Фильтр справа -->
-      <aside class="catalog-filters">
-        <form class="filters-form" action="#" method="get">
-          <fieldset>
-            <legend>Категория</legend>
+    <div class="catalog-toolbar" role="search" aria-label="Поиск и фильтры">
+      <div class="catalog-toolbar__field">
+        <label class="catalog-toolbar__label" for="catalog-search">Поиск</label>
+        <input class="catalog-toolbar__input" id="catalog-search" type="search"
+              placeholder="Название товара" autocomplete="off">
+      </div>
 
-            <label>
-              <input type="checkbox" name="category" value="all">
-              Все товары
-            </label>
+      <div class="catalog-toolbar__field">
+        <label class="catalog-toolbar__label" for="category-filter">Категория</label>
+        <select class="catalog-toolbar__input" id="category-filter">
+          <option value="all">Все</option>
+          <option value="day">День</option>
+          <option value="night">Ночь</option>
+          <option value="storm">Гроза</option>
+          <option value="winter">Зима</option>
+        </select>
+      </div>
 
-            <label>
-              <input type="checkbox" name="category" value="popular">
-              Популярные
-            </label>
+      <div class="catalog-toolbar__field">
+        <label class="catalog-toolbar__label" for="sort-select">Сортировка</label>
+        <select class="catalog-toolbar__input" id="sort-select">
+          <option value="default">По умолчанию</option>
+          <option value="price-asc">Цена: по возрастанию</option>
+          <option value="price-desc">Цена: по убыванию</option>
+          <option value="title-asc">Название: А–Я</option>
+          <option value="title-desc">Название: Я–А</option>
+        </select>
+      </div>
+    </div>
 
-            <label>
-              <input type="checkbox" name="category" value="new">
-              Новинки
-            </label>
-          </fieldset>
-
-          <fieldset>
-            <legend>Цена</legend>
-
-            <label for="price-from">От</label>
-            <input id="price-from" name="price-from" type="number" min="0" placeholder="0">
-
-            <label for="price-to">До</label>
-            <input id="price-to" name="price-to" type="number" min="0" placeholder="5000">
-          </fieldset>
-
-          <button class="button" type="submit">Применить</button>
-        </form>
-      </aside>
-
-      <!-- Товары слева -->
-      <section class="catalog-products">
-          <div class="products-grid">
-            <!-- Карточка 1 -->
-            <article class="product-card bmw-card">
-              <a class="bmw-card__media" href="product1.html" aria-label="Товар 1 — подробнее">
-                <img
-                  src="images/product-1.jpg"
-                  sizes="(max-width: 639px) 100vw,
-                        (max-width: 1023px) 50vw,
-                        33vw"
-                  alt="Товар 1"
-                  width="640"
-                  height="480"
-                  loading="lazy"
-                  class="product-card__image bmw-card__image"
-                >
-              </a>
-              <div class="bmw-card__body">
-                <p class="bmw-card__kicker">День</p>
-                <h3 class="product-card__title bmw-card__title">
-                  <a class="product-card__link bmw-card__link" href="product1.html">Солнечно</a>
-                </h3>
-                <p class="product-card__description">Подходит для прогулок и свиданий.</p>
-                <p class="product-card__price">Цена: 1000000 руб.</p>
-                <button class="button button--primary product-card__button" type="button" data-product="Товар 1">
-                  Заказать
-                </button>
-              </div>
-            </article>
-
-            <!-- Карточка 2 -->
-            <article class="product-card bmw-card">
-              <a class="bmw-card__media" href="product2.html" aria-label="Товар 2 — подробнее">
-                <img
-                  src="images/product-2.jpg"
-                  sizes="(max-width: 639px) 100vw,
-                        (max-width: 1023px) 50vw,
-                        33vw"
-                  alt="Товар 2"
-                  width="640"
-                  height="480"
-                  loading="lazy"
-                  class="product-card__image bmw-card__image"
-                >
-              </a>
-              <div class="bmw-card__body">
-                <p class="bmw-card__kicker">День</p>
-                <h3 class="product-card__title bmw-card__title">
-                  <a class="product-card__link bmw-card__link" href="product2.html">Дождь</a>
-                </h3>
-                <p class="product-card__description">Полив грыдок для вас</p>
-                <p class="product-card__price">Цена: 1500000 руб.</p>
-                <button class="button button--primary product-card__button" type="button" data-product="Товар 2">
-                  Заказать
-                </button>
-              </div>
-            </article>
-
-            <!-- Карточка 3 -->
-            <article class="product-card bmw-card">
-              <span class="product-card__badge">Новинка</span>
-              <a class="bmw-card__media" href="product3.html" aria-label="Товар 3 — подробнее">
-                <img
-                  src="images/product-3.jpg"
-                  sizes="(max-width: 639px) 100vw,
-                        (max-width: 1023px) 50vw,
-                        33vw"
-                  alt="Товар 3"
-                  width="640"
-                  height="480"
-                  loading="lazy"
-                  class="product-card__image bmw-card__image"
-                >
-              </a>
-              <div class="bmw-card__body">
-                <p class="bmw-card__kicker">Ночь</p>
-                <h3 class="product-card__title bmw-card__title">
-                  <a class="product-card__link bmw-card__link" href="product3.html">Звездопад</a>
-                </h3>
-                <p class="product-card__description">Надеемся в Землю не прилетит</p>
-                <p class="product-card__price">Цена: 2000000 руб.</p>
-                <button class="button button--primary product-card__button" type="button" data-product="Товар 3">
-                  Заказать
-                </button>
-              </div>
-            </article>
-          </div>
+    <section class="catalog-products">
+      <p class="catalog-count" aria-live="polite"></p>
+      <p class="catalog-empty" hidden>Ничего не найдено.</p>
+      <div class="products-grid" data-products-container></div>
+      <div class="catalog-pagination" data-pagination></div>
     </section>
   </main>
 
@@ -193,71 +104,6 @@
   <footer class="site-footer">
     <p>&copy; 2026 Учебный проект. Все права защищены.</p>
     <p>Дисциплина: Фронтенд и бэкенд разработка</p>
-    <a class="button button--primary" href="order.html">Оформить заявку</a>
   </footer>
-
-  <!-- Модальное окно заявки -->
-  <dialog class="order-dialog" id="order-dialog" aria-labelledby="order-dialog-title">
-    <h2 class="order-dialog__title" id="order-dialog-title">Оформление заявки</h2>
-
-    <form class="order-form" id="order-form" action="#" method="post" novalidate>
-      <input id="selected-product" name="selected-product" type="hidden">
-
-      <div class="order-form__field">
-        <label class="order-form__label" for="order-name">Имя</label>
-        <input class="order-form__input" id="order-name" name="name" type="text"
-               placeholder="Введите ваше имя" minlength="2" autocomplete="given-name" required>
-      </div>
-
-      <div class="order-form__field">
-        <label class="order-form__label" for="order-email">E-mail</label>
-        <input class="order-form__input" id="order-email" name="email" type="email"
-               placeholder="example@mail.ru" autocomplete="email" required>
-      </div>
-
-      <div class="order-form__field">
-        <label class="order-form__label" for="order-phone">Телефон</label>
-        <input class="order-form__input" id="order-phone" name="phone" type="tel"
-               inputmode="tel" placeholder="+7 (900) 000-00-00"
-               pattern="^\+7 \(\d{3}\) \d{3}-\d{2}-\d{2}$" required>
-        <small class="order-form__hint">Формат: +7 (900) 000-00-00</small>
-      </div>
-
-      <div class="order-form__field">
-        <label class="order-form__label" for="order-date">Дата связи</label>
-        <input class="order-form__input" id="order-date" name="date" type="date">
-      </div>
-
-      <div class="order-form__field">
-        <label class="order-form__label" for="order-topic">Тема заявки</label>
-        <select class="order-form__input" id="order-topic" name="topic" required>
-          <option value="">Выберите тему</option>
-          <option value="product">Заказ товара</option>
-          <option value="consultation">Консультация</option>
-          <option value="delivery">Доставка</option>
-        </select>
-      </div>
-
-      <div class="order-form__field">
-        <label class="order-form__label" for="order-comment">Комментарий</label>
-        <textarea class="order-form__input" id="order-comment" name="comment" rows="4"
-                  placeholder="Укажите дополнительную информацию"></textarea>
-      </div>
-
-      <div class="order-form__field order-form__field--checkbox">
-        <label class="order-form__label">
-          <input class="order-form__checkbox" id="order-agreement" name="agreement" type="checkbox" required>
-          Я согласен на обработку данных
-        </label>
-      </div>
-
-      <div class="order-form__actions">
-        <button class="button button--secondary" type="button" id="close-order-dialog">Закрыть</button>
-        <button class="button button--primary" type="submit">Отправить заявку</button>
-      </div>
-    </form>
-  </dialog>
-
-  <p class="success-message" id="success-message" hidden>Форма успешно отправлена!</p>
 </body>
 </html>

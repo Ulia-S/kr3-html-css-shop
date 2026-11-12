@@ -12,6 +12,8 @@
 
   <link rel="stylesheet" href="css/style.css">
   <link rel="stylesheet" href="css/responsive.css">
+  <script src="js/data.js" defer></script>
+  <script src="js/cart.js" defer></script>
   <script src="js/main.js" defer></script>
 </head>
 
@@ -20,26 +22,26 @@
 
   <header class="site-header site-header--solid">
     <div class="site-header__inner">
-      <a class="site-header__logo" href="index.html" aria-label="ShopProject — на главную">
+      <a class="site-header__logo" href="index.html" aria-label="MeteoMarket — на главную">
         MeteoMarket
       </a>
 
       <nav class="site-nav" aria-label="Основная навигация">
         <ul class="site-nav__list">
-          <li class="site-nav__item">
-            <a class="site-nav__link site-nav__link--active" href="index.html">Главная</a>
-          </li>
-          <li class="site-nav__item">
-            <a class="site-nav__link" href="catalog.html">Каталог</a>
-          </li>
-          <li class="site-nav__item">
-            <a class="site-nav__link" href="contacts.html">Контакты</a>
-          </li>
-          <li class="site-nav__item">
-            <a class="site-nav__link" href="index.html#popular">Популярные товары</a>
-          </li>
+          <li><a class="site-nav__link site-nav__link--active" href="index.html">Главная</a></li>
+          <li><a class="site-nav__link " href="catalog.html">Каталог</a></li>
+          <li><a class="site-nav__link " href="contacts.html">Контакты</a></li>
+          <li><a class="site-nav__link " href="favorites.html">Избранное</a></li>
+          <li><a class="site-nav__link " href="cart.html">Корзина</a></li>
+          <li><a class="site-nav__link" href="index.html#popular">Популярные товары</a></li>
         </ul>
       </nav>
+
+      <div class="site-header__actions">
+        <span class="cart-counter" aria-live="polite">Корзина: 0</span>
+        <span class="fav-counter" aria-live="polite">Избранное: 0</span>
+        <button type="button" data-toggle-theme class="button button--secondary site-header__theme">Тема</button>
+      </div>
     </div>
   </header>
 
@@ -73,9 +75,18 @@
         </p>
       </div>
 
-      <div class="products-grid">
+      <div class="products-slider">
+      <button
+        type="button"
+        class="products-slider__arrow products-slider__arrow--prev"
+        data-slider-prev
+        aria-label="Прокрутить влево"
+      >‹</button>
+
+      <div class="products-grid" data-slider-track>
         <!-- Карточка 1 -->
         <article class="product-card bmw-card">
+          <button class="fav-btn" type="button" data-action="toggle-favorite" data-product-id="1" aria-label="Добавить в избранное">♡</button>
           <a class="bmw-card__media" href="product1.html" aria-label="Товар 1 — подробнее">
             <img
               src="images/product-1.jpg"
@@ -95,15 +106,16 @@
               <a class="product-card__link bmw-card__link" href="product1.html">Солнечно</a>
             </h3>
             <p class="product-card__description">Подходит для прогулок и свиданий.</p>
-            <p class="product-card__price">Цена: 1000000 руб.</p>
-            <button class="button button--primary product-card__button" type="button" data-product="Товар 1">
-              Заказать
+            <p class="product-card__price">Цена: 4882000 руб.</p>
+            <button class="button button--primary product-card__button" type="button"
+              data-action="add-to-cart" data-product-id="1">В корзину
             </button>
           </div>
         </article>
 
         <!-- Карточка 2 -->
         <article class="product-card bmw-card">
+          <button class="fav-btn" type="button" data-action="toggle-favorite" data-product-id="2" aria-label="Добавить в избранное">♡</button>
           <a class="bmw-card__media" href="product2.html" aria-label="Товар 2 — подробнее">
             <img
               src="images/product-2.jpg"
@@ -123,15 +135,16 @@
               <a class="product-card__link bmw-card__link" href="product2.html">Дождь</a>
             </h3>
             <p class="product-card__description">Полив грядок для вас</p>
-            <p class="product-card__price">Цена: 1500000 руб.</p>
-            <button class="button button--primary product-card__button" type="button" data-product="Товар 2">
-              Заказать
+            <p class="product-card__price">Цена: 2090000 руб.</p>
+            <button class="button button--primary product-card__button" type="button"
+              data-action="add-to-cart" data-product-id="2">В корзину
             </button>
           </div>
         </article>
 
         <!-- Карточка 3 -->
         <article class="product-card bmw-card">
+          <button class="fav-btn" type="button" data-action="toggle-favorite" data-product-id="3" aria-label="Добавить в избранное">♡</button>
           <span class="product-card__badge">Новинка</span>
           <a class="bmw-card__media" href="product3.html" aria-label="Товар 3 — подробнее">
             <img
@@ -152,12 +165,166 @@
               <a class="product-card__link bmw-card__link" href="product3.html">Звездопад</a>
             </h3>
             <p class="product-card__description">Надеемся в Землю не прилетит</p>
-            <p class="product-card__price">Цена: 2000000 руб.</p>
-            <button class="button button--primary product-card__button" type="button" data-product="Товар 3">
-              Заказать
+            <p class="product-card__price">Цена: 4490000 руб.</p>
+            <button class="button button--primary product-card__button" type="button"
+              data-action="add-to-cart" data-product-id="3">В корзину
             </button>
           </div>
         </article>
+
+        <!-- Карточка 4 -->
+        <article class="product-card bmw-card">
+          <button class="fav-btn" type="button" data-action="toggle-favorite" data-product-id="4" aria-label="Добавить в избранное">♡</button>
+          <a class="bmw-card__media" href="product4.html" aria-label="Товар 4 — подробнее">
+            <img
+              src="images/product-4.jpg"
+              sizes="(max-width: 639px) 100vw,
+                    (max-width: 1023px) 50vw,
+                    33vw"
+              alt="Товар 4"
+              width="640"
+              height="480"
+              loading="lazy"
+              class="product-card__image bmw-card__image"
+            >
+          </a>
+          <div class="bmw-card__body">
+            <p class="bmw-card__kicker">Любое время</p>
+            <h3 class="product-card__title bmw-card__title">
+              <a class="product-card__link bmw-card__link" href="product4.html">Гроза</a>
+            </h3>
+            <p class="product-card__description">Гром, молнии и сильный ветер.</p>
+            <p class="product-card__price">Цена: 3370000 руб.</p>
+            <button class="button button--primary product-card__button" type="button"
+              data-action="add-to-cart" data-product-id="4">В корзину
+            </button>
+          </div>
+        </article>
+
+        <!-- Карточка 5 -->
+        <article class="product-card bmw-card">
+          <button class="fav-btn" type="button" data-action="toggle-favorite" data-product-id="5" aria-label="Добавить в избранное">♡</button>
+          <a class="bmw-card__media" href="product5.html" aria-label="Товар 5 — подробнее">
+            <img
+              src="images/product-5.jpg"
+              sizes="(max-width: 639px) 100vw,
+                    (max-width: 1023px) 50vw,
+                    33vw"
+              alt="Товар 5"
+              width="640"
+              height="480"
+              loading="lazy"
+              class="product-card__image bmw-card__image"
+            >
+          </a>
+          <div class="bmw-card__body">
+            <p class="bmw-card__kicker">Любое время</p>
+            <h3 class="product-card__title bmw-card__title">
+              <a class="product-card__link bmw-card__link" href="product5.html">Туман</a>
+            </h3>
+            <p class="product-card__description">Плотная дымка, видимость ограничена.</p>
+            <p class="product-card__price">Цена: 3500000 руб.</p>
+            <button class="button button--primary product-card__button" type="button"
+              data-action="add-to-cart" data-product-id="5">В корзину
+            </button>
+          </div>
+        </article>
+
+        <!-- Карточка 6 -->
+        <article class="product-card bmw-card">
+          <button class="fav-btn" type="button" data-action="toggle-favorite" data-product-id="6" aria-label="Добавить в избранное">♡</button>
+          <a class="bmw-card__media" href="product6.html" aria-label="Товар 6 — подробнее">
+            <img
+              src="images/product-6.jpg"
+              sizes="(max-width: 639px) 100vw,
+                    (max-width: 1023px) 50vw,
+                    33vw"
+              alt="Товар 6"
+              width="640"
+              height="480"
+              loading="lazy"
+              class="product-card__image bmw-card__image"
+            >
+          </a>
+          <div class="bmw-card__body">
+            <p class="bmw-card__kicker">Любое время</p>
+            <h3 class="product-card__title bmw-card__title">
+              <a class="product-card__link bmw-card__link" href="product6.html">Снегопад</a>
+            </h3>
+            <p class="product-card__description">Крупный снег, мягкая зима.</p>
+            <p class="product-card__price">Цена: 2995700 руб.</p>
+            <button class="button button--primary product-card__button" type="button"
+              data-action="add-to-cart" data-product-id="6">В корзину
+            </button>
+          </div>
+        </article>
+
+        <!-- Карточка 7 -->
+        <article class="product-card bmw-card">
+          <button class="fav-btn" type="button" data-action="toggle-favorite" data-product-id="7" aria-label="Добавить в избранное">♡</button>
+          <a class="bmw-card__media" href="product7.html" aria-label="Товар 7 — подробнее">
+            <img
+              src="images/product-7.jpg"
+              sizes="(max-width: 639px) 100vw,
+                    (max-width: 1023px) 50vw,
+                    33vw"
+              alt="Товар 7"
+              width="640"
+              height="480"
+              loading="lazy"
+              class="product-card__image bmw-card__image"
+            >
+          </a>
+          <div class="bmw-card__body">
+            <p class="bmw-card__kicker">День</p>
+            <h3 class="product-card__title bmw-card__title">
+              <a class="product-card__link bmw-card__link" href="product7.html">Радуга</a>
+            </h3>
+            <p class="product-card__description">Семь цветов после дождя.</p>
+            <p class="product-card__price">Цена: 3585000 руб.</p>
+            <button class="button button--primary product-card__button" type="button"
+              data-action="add-to-cart" data-product-id="7">В корзину
+            </button>
+          </div>
+        </article>
+
+        <!-- Карточка 8 -->
+        <article class="product-card bmw-card">
+          <button class="fav-btn" type="button" data-action="toggle-favorite" data-product-id="8" aria-label="Добавить в избранное">♡</button>
+          <a class="bmw-card__media" href="product8.html" aria-label="Товар 8 — подробнее">
+            <img
+              src="images/product-8.jpg"
+              sizes="(max-width: 639px) 100vw,
+                    (max-width: 1023px) 50vw,
+                    33vw"
+              alt="Товар 8"
+              width="640"
+              height="480"
+              loading="lazy"
+              class="product-card__image bmw-card__image"
+            >
+          </a>
+          <div class="bmw-card__body">
+            <p class="bmw-card__kicker">Ночь</p>
+            <h3 class="product-card__title bmw-card__title">
+              <a class="product-card__link bmw-card__link" href="product8.html">Северное сияние</a>
+            </h3>
+            <p class="product-card__description">Полярное сияние над горизонтом.</p>
+            <p class="product-card__price">Цена: 5990000 руб.</p>
+            <button class="button button--primary product-card__button" type="button"
+              data-action="add-to-cart" data-product-id="8">В корзину
+            </button>
+          </div>
+        </article>
+
+      </div>
+
+      <button
+      type="button"
+      class="products-slider__arrow products-slider__arrow--next"
+      data-slider-next
+      aria-label="Прокрутить вправо"
+      >›</button>
       </div>
     </section>
 
@@ -184,71 +351,6 @@
   <footer class="site-footer" id="contacts">
     <p>&copy; 2026 Учебный проект. Все права защищены.</p>
     <p>Дисциплина: Фронтенд и бэкенд разработка</p>
-    <a class="button button--primary" href="order.html">Оформить заявку</a>
   </footer>
-
-  <!-- Модальное окно заявки -->
-  <dialog class="order-dialog" id="order-dialog" aria-labelledby="order-dialog-title">
-    <h2 class="order-dialog__title" id="order-dialog-title">Оформление заявки</h2>
-
-    <form class="order-form" id="order-form" action="#" method="post" novalidate>
-      <input id="selected-product" name="selected-product" type="hidden">
-
-      <div class="order-form__field">
-        <label class="order-form__label" for="order-name">Имя</label>
-        <input class="order-form__input" id="order-name" name="name" type="text"
-               placeholder="Введите ваше имя" minlength="2" autocomplete="given-name" required>
-      </div>
-
-      <div class="order-form__field">
-        <label class="order-form__label" for="order-email">E-mail</label>
-        <input class="order-form__input" id="order-email" name="email" type="email"
-               placeholder="example@mail.ru" autocomplete="email" required>
-      </div>
-
-      <div class="order-form__field">
-        <label class="order-form__label" for="order-phone">Телефон</label>
-        <input class="order-form__input" id="order-phone" name="phone" type="tel"
-               inputmode="tel" placeholder="+7 (900) 000-00-00"
-               pattern="^\+7 \(\d{3}\) \d{3}-\d{2}-\d{2}$" required>
-        <small class="order-form__hint">Формат: +7 (900) 000-00-00</small>
-      </div>
-
-      <div class="order-form__field">
-        <label class="order-form__label" for="order-date">Дата связи</label>
-        <input class="order-form__input" id="order-date" name="date" type="date">
-      </div>
-
-      <div class="order-form__field">
-        <label class="order-form__label" for="order-topic">Тема заявки</label>
-        <select class="order-form__input" id="order-topic" name="topic" required>
-          <option value="">Выберите тему</option>
-          <option value="product">Заказ товара</option>
-          <option value="consultation">Консультация</option>
-          <option value="delivery">Доставка</option>
-        </select>
-      </div>
-
-      <div class="order-form__field">
-        <label class="order-form__label" for="order-comment">Комментарий</label>
-        <textarea class="order-form__input" id="order-comment" name="comment" rows="4"
-                  placeholder="Укажите дополнительную информацию"></textarea>
-      </div>
-
-      <div class="order-form__field order-form__field--checkbox">
-        <label class="order-form__label">
-          <input class="order-form__checkbox" id="order-agreement" name="agreement" type="checkbox" required>
-          Я согласен на обработку данных
-        </label>
-      </div>
-
-      <div class="order-form__actions">
-        <button class="button button--secondary" type="button" id="close-order-dialog">Закрыть</button>
-        <button class="button button--primary" type="submit">Отправить заявку</button>
-      </div>
-    </form>
-  </dialog>
-
-  <p class="success-message" id="success-message" hidden>Форма успешно отправлена!</p>
 </body>
 </html>

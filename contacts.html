@@ -12,36 +12,34 @@
   <meta property="og:image" content="https://username.github.io/kr1-html-css-shop/images/preview.jpg">
 
   <link rel="stylesheet" href="css/style.css">
-  <link rel="stylesheet" href="css/responsive.css"> 
+  <link rel="stylesheet" href="css/responsive.css">
+  <script src="js/data.js" defer></script>
+  <script src="js/cart.js" defer></script>
+  <script src="js/modal.js" defer></script>
+  <script src="js/validation.js" defer></script>
+  <script src="js/main.js" defer></script>
 </head>
 
 <body>
   <a class="skip-link" href="#main">Перейти к основному содержимому</a>
-
   <header class="site-header site-header--solid">
     <div class="site-header__inner">
       <a class="site-header__logo" href="index.html">MeteoMarket</a>
-
       <nav class="site-nav" aria-label="Основная навигация">
         <ul class="site-nav__list">
-          <li class="site-nav__item">
-            <a class="site-nav__link href="index.html" href="index.html">
-              Главная
-            </a>
-          </li>
-          <li class="site-nav__item">
-            <a class="site-nav__link" href="catalog.html">Каталог</a>
-          </li>
-          <li class="site-nav__item">
-            <a class="site-nav__link site-nav__link--active" href="contacts.html">Контакты</a>
-          </li>
-          <li class="site-nav__item">
-            <a class="site-nav__link" href="index.html#popular">
-              Популярные товары
-            </a>
-          </li>
+          <li><a class="site-nav__link " href="index.html">Главная</a></li>
+          <li><a class="site-nav__link " href="catalog.html">Каталог</a></li>
+          <li><a class="site-nav__link site-nav__link--active" href="contacts.html">Контакты</a></li>
+          <li><a class="site-nav__link " href="favorites.html">Избранное</a></li>
+          <li><a class="site-nav__link " href="cart.html">Корзина</a></li>
+          <li><a class="site-nav__link" href="index.html#popular">Популярные товары</a></li>
         </ul>
       </nav>
+      <div class="site-header__actions">
+        <span class="cart-counter" aria-live="polite">Корзина: 0</span>
+        <span class="fav-counter" aria-live="polite">Избранное: 0</span>
+        <button type="button" data-toggle-theme class="button button--secondary site-header__theme">Тема</button>
+      </div>
     </div>
   </header>
 
@@ -84,10 +82,8 @@
 
     <section class="section" id="feedback">
       <h2>Обратная связь</h2>
-      <p>
-        Для отправки заявки используйте форму в модальном окне на главной странице.
-      </p>
-      <a class="button" href="index.html#contacts">Перейти к форме</a>
+      <p>Нажмите кнопку — откроется форма обратной связи.</p>
+      <button class="button button--secondary" type="button" data-action="order">Написать нам</button>
     </section>
   </main>
 
@@ -96,11 +92,10 @@
   <footer class="site-footer">
     <p>&copy; 2026 Учебный проект. Все права защищены.</p>
     <p>Дисциплина: Фронтенд и бэкенд разработка</p>
-    <a class="button button--primary" href="order.html">Оформить заявку</a>
   </footer>
 
   <dialog class="order-dialog" id="order-dialog" aria-labelledby="order-dialog-title">
-    <h2 class="order-dialog__title" id="order-dialog-title">Оформление заявки</h2>
+    <h2 class="order-dialog__title" id="order-dialog-title">Написать нам</h2>
 
     <form class="order-form" id="order-form" action="#" method="post" novalidate>
       <input id="selected-product" name="selected-product" type="hidden">
